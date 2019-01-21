@@ -1,4 +1,5 @@
 from Functionality.Player import *
+from Functionality.Symbol import *
 from Exceptions import *
 
 RowCount = 3
@@ -12,22 +13,30 @@ class Board:
 
     def reset(self):
         self._lastSelectedField = None
-        self._fields = [[Field(i, j, Empty) for i in range(ColumnCount)] for j in range(RowCount)] #List Comprehensions
+        self._board = [[Player(Symbol.none) for i in range(ColumnCount)] for j in range(RowCount)] #List Comprehensions
 
     def dropToColumn(self, column, state):
         selectedField = None
         for i in range(RowCount - 1, -1, -1):
-            if (self._fields[i][column].getState() == Empty):
-                selectedField = Field(i, column, state)
-                self._fields[i][column] = selectedField
+            if (self._board[i][column].getSymbol() == Symbol.none):
+                selectedField = Player(i, column, state)
+                self._board[i][column] = selectedField
                 break
         if (selectedField == None):
             raise FullColumnException(column)
 
         self._lastSelectedField = selectedField
 
-    def getField(self, row, column):
-        return self._fields[row][column]
+    def isFieldOccupied(self, row, column):
+        return self._board[row][column].getSymbol() != Symbol.none
 
-    def getLastSelectedField(self):
-        return self._lastSelectedField
+    def getField(self, row, column):
+        return self._board[row][column]
+
+    def setField(self, row, column, player):
+        self._board[row][column] = player
+
+    def isFinished(self):
+
+
+

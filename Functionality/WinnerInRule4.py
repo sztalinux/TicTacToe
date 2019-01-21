@@ -15,7 +15,7 @@ class WinnerInRule4:
             return Empty
 
         row = selectedField.getRow()
-        state = selectedField.getState()
+        state = selectedField.getSymbol()
         countOnTheLeft = 0
         for column in range(selectedField.getColumn() - 1, -1, -1):
             if (self.getFieldState(row, column) == state):
@@ -41,7 +41,7 @@ class WinnerInRule4:
             return Empty
 
         column = selectedField.getColumn()
-        state = selectedField.getState()
+        state = selectedField.getSymbol()
 
         countToDown = 0
         for row in range(selectedField.getRow() + 1, self._board.RowCount, 1):

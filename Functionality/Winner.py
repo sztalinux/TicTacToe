@@ -24,7 +24,7 @@ class Winner:
             return Empty
 
         row = selectedField.getRow()
-        state = selectedField.getState()
+        state = selectedField.getSymbol()
         countOnTheLeft = 0
         for column in range(selectedField.getColumn() - 1, -1, -1):
             if (self.getFieldState(row, column) == state):
@@ -50,7 +50,7 @@ class Winner:
             return Empty
 
         column = selectedField.getColumn()
-        state = selectedField.getState()
+        state = selectedField.getSymbol()
 
         countToDown = 0
         for row in range(selectedField.getRow() + 1, RowCount, 1):
@@ -70,7 +70,7 @@ class Winner:
             return Empty
 
         row = selectedField.getRow()
-        state = selectedField.getState()
+        state = selectedField.getSymbol()
         countOnTheLeftBottom = 0
         for column in range(selectedField.getColumn() - 1, -1, -1):
             row += 1
@@ -122,4 +122,4 @@ class Winner:
         return Empty
 
     def getFieldState(self, row, column):
-        return self._board.getField(row, column).getState()
+        return self._board.getField(row, column).getSymbol()

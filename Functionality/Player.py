@@ -1,18 +1,7 @@
-class Field:
-    def __init__(self, row, column, state):
-        self._row = row
-        self._column = column
-        self._state = state
+class Player:
+    def __init__(self, symbol):
+        self._symbol = symbol
 
-    def getRow(self):
-        return self._row
+    def getSymbol(self):
+        return self._symbol
 
-    def getColumn(self):
-        return self._column
-
-    def getState(self):
-        return self._state
-
-Empty = 0
-Player1 = 1
-Player2 = 2
