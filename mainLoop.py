@@ -7,6 +7,7 @@ from Graphic.DrawingMenu import *
 from Graphic.DrawingGame import *
 from Graphic.DrawingSignSelection import *
 from Graphic.Window import *
+from Functionality.GameControl import *
 
 
 class mainLoop:
@@ -14,6 +15,7 @@ class mainLoop:
         self._menuWindow = DrawingMenu()
         self._gameWindow = DrawingGame()
         self._signSelectionWindow = DrawingSignSelection()
+        self._gameControl = GameControl(self._signSelectionWindow, self._gameWindow)
 
     def loop(self):
 
@@ -33,11 +35,7 @@ class mainLoop:
                 if self._signSelectionWindow.ifMenuClicked:
                     self._menuWindow.setIfStartClicked(False)
                 elif self._signSelectionWindow.ifPlayClicked:
-                    self._gameWindow.createWhoseTurnButton()
-
-
-
-
+                    self._gameControl.start()
 
             pygame.display.flip()
 

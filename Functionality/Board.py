@@ -1,5 +1,6 @@
 from Functionality.Player import *
 from Functionality.Symbol import *
+from Functionality.Winner import *
 from Exceptions import *
 
 RowCount = 3
@@ -36,7 +37,10 @@ class Board:
     def setField(self, row, column, player):
         self._board[row][column] = player
 
-    def isFinished(self):
+    def whoHasFinished(self):
+        self._winner = Winner(self._board)
+        return self._winner.getWinner()
+
 
 
 

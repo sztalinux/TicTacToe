@@ -18,7 +18,7 @@ class Game():
         if player == 1:
             self._playerToThrow = self._playerX
         elif player == 2:
-            self._playerToThrow = self._playerY
+            self._playerToThrow = self._playerO
         else:
             self._playerToThrow = Player(Symbol.none)
         self._board.reset()
@@ -32,18 +32,11 @@ class Game():
     def getFieldState(self, row, column):
         return self._board.getField(row, column).getSymbol()
 
-    def dropToColumn(self, column):
-        self._board.dropToColumn(column, self._playerToThrow)
-        self.switchPlayers()
-
     def getField(self, row, column):
         return self._board.getField(row, column)
 
-    def isColumnFull(self, column):
-        return self._board.getField(0, column).getSymbol() != Empty
-
     def switchPlayers(self):
-        if (self._playerToThrow == Player1):
-            self._playerToThrow = Player2
+        if (self._playerToThrow == self._playerX):
+            self._playerToThrow = self._playerO
         else:
-            self._playerToThrow = Player1
+            self._playerToThrow = self._playerX
