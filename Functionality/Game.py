@@ -15,6 +15,7 @@ class Game():
         self._board = Board(self._rowCount, self._columnCount)
         self._winner = Winner(self._board, self._rowCount, self._columnCount)
         self._playerToThrow = self._playerX
+        self._boardIsFull = False
 
     def startGame(self, player):
         if player == 1:
@@ -62,6 +63,14 @@ class Game():
         for row in range(self._rowCount):
             for column in range(self._columnCount):
                 if self.getField(row, column).getSymbol() == Symbol.none:
-                    return False
-        return True
+                    self._boardIsFull = False
+                    return self._boardIsFull
+        self._boardIsFull = True
+        return self._boardIsFull
 
+    def setBoardIsFull(self, param):
+        self._boardIsFull = param
+
+
+    def setField(self, row, column, player):
+        self._board.setField(row, column, player)

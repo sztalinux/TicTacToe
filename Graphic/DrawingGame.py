@@ -53,6 +53,12 @@ class DrawingGame(Window):
                     self._window.blit(self._XSign, (self._boardCornerX + self._fieldWidth * column + (column + 1) * self._gap, self._boardCornerY + self._fieldHeight * row + (row + 1) * self._gap))
                 elif field.getSymbol() == Symbol.O:
                     self._window.blit(self._OSign, (self._boardCornerX + self._fieldWidth * column + (column + 1) * self._gap, self._boardCornerY + self._fieldHeight * row + (row + 1) * self._gap))
+        turn = pygame.image.load('ruchX.png')
+        if self._game.getPlayerToThrow().getSymbol() == Symbol.X:
+            turn = pygame.image.load('ruchX.png')
+        if self._game.getPlayerToThrow().getSymbol() == Symbol.O:
+            turn = pygame.image.load('ruchO.png')
+        self._window.blit(turn, (400, 0))
 
 
     def boardDraw(self):
@@ -62,31 +68,32 @@ class DrawingGame(Window):
     def drawScreen(self):
         self.boardDraw()
         self._resetButton.draw()
-        self._menuButton.draw()
+        # self._menuButton.draw()
         self.updateBoard()
 
 
     def drawWinner(self, symbol):
         if symbol == Symbol.X:
             board = pygame.image.load('wygranaX.png')
+            self._window.blit(board, (0, 0))
         elif symbol == Symbol.O:
             board = pygame.image.load('wygranaO.png')
+            self._window.blit(board, (0, 0))
         elif symbol == Symbol.none:
             board = pygame.image.load('remis.png')
             self._window.blit(board, (0, 0))
 
     def reset(self):
         self._ifResetClicked = True
-        self._game._board = [[Player(Symbol.none) for i in range(3)] for j in range(3)]
+        for row in range(3):
+            for column in range(3):
+                self._game.setField(row, column, Player(Symbol.none))
 
     def backToMenu(self):
         self._ifMenuClicked = True
 
-    def setField(self, column):
-        try:
-            self._game.dropToColumn(column)
-        except FieldOccupiedException as full:
-            print(full.getMessage())
+    def setIfResetClicked(self, param):
+        self._ifResetClicked = param
 
     @property
     def ifResetClicked(self):

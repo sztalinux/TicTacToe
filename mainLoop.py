@@ -56,6 +56,10 @@ class mainLoop:
                 self._gameWindow.drawWinner(winner)
                 break
             elif self._gameWindow.ifResetClicked:
+                self._started = False
+                self._gameWindow.setIfResetClicked(False)
+                self._game.setBoardIsFull(False)
+                winner = Symbol.none
                 break
             elif self._gameWindow.ifMenuClicked:
                 self._started = False

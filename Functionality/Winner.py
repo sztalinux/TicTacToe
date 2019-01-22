@@ -64,7 +64,7 @@ class Winner:
             if countX == self._rowCount:
                 return Symbol.X
             elif countO == self._columnCount:
-                return Symbol.Y
+                return Symbol.O
 
         return Symbol.none
 
@@ -83,7 +83,7 @@ class Winner:
             if countX == self._rowCount:
                 return Symbol.X
             elif countO == self._columnCount:
-                return Symbol.Y
+                return Symbol.O
 
         return Symbol.none
 
@@ -103,6 +103,6 @@ class Winner:
             if countX == self._rowCount:
                 return Symbol.X
             elif countO == self._columnCount:
-                return Symbol.Y
+                return Symbol.O
 
         return Symbol.none
