@@ -1,9 +1,7 @@
 from enum import Enum
 
-from pip._internal.utils.misc import enum
 
-
-class Symbol(enum):
+class Symbol(Enum):
     X = 1
     O = 2
     none = 3

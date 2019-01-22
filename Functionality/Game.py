@@ -40,3 +40,6 @@ class Game():
             self._playerToThrow = self._playerO
         else:
             self._playerToThrow = self._playerX
+
+    def whoHasWon(self):
+        return self._board.whoHasWon()

@@ -11,6 +11,9 @@ class DrawingSignSelection(Window):
         self._ifMenuClicked = False
         self._playButton = self.createPlayButton()
         self._menuButton = self.createMenuButton()
+        self._XButton = self.createXButton()
+        self._OButton = self.createOButton()
+        self._playButton.setEnabled(False)
 
     def createXButton(self):
         textColour = colours["BLACK"]
@@ -48,10 +51,24 @@ class DrawingSignSelection(Window):
         clickAction = lambda: self.backToMenu()  # lambda
         return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GREEN"], ("MENU", 40, textColour), clickAction)
 
+    def drawScreen(self):
+        self._playButton.draw()
+        self._menuButton.draw()
+        self._XButton.draw()
+        self._OButton.draw()
+
     def setXPlayer(self):
+        # rysowanie sie otoczki nad tym
+        self._playButton.setEnabled(True)
+        self._XButton.setEnabled(False)
+        self._OButton.setEnabled(True)
         self._player = 1
 
     def setOPlayer(self):
+        # rysowanie sie otoczki nad tym
+        self._playButton.setEnabled(True)
+        self._OButton.setEnabled(False)
+        self._XButton.setEnabled(True)
         self._player = 2
 
     def startTheGame(self):

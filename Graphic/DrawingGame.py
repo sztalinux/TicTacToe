@@ -1,10 +1,11 @@
+import os
+
 from Functionality.Game import *
 from Graphic.Drawing import *
-
+from Graphic.ps import *
 class DrawingGame(Window):
     def __init__(self):
         super().__init__()
-        self._gap = 5
         self._boardWidth = ColumnCount
         self._boardHeight = RowCount
         self._boardCornerX = 100
@@ -14,7 +15,6 @@ class DrawingGame(Window):
 
     def createWhoseTurnButton(self):
         textColour = colours["BLACK"]
-        buttonColour = colours["WHITE"]
         buttonWidth = 200
         buttonHeight = 50
         buttonX = 300
@@ -29,8 +29,15 @@ class DrawingGame(Window):
         # else:
         #     whoseTurn = "WCISNIJ START"
 
-        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, buttonColour,
-                      buttonColour, ("DUPA", 30, textColour))
+        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GREEN"], ("DUPA", 40, textColour))
+
+    def boardDraw(self):
+        board = pygame.image.load('plansza.png')
+        self._window.blit(board, (100, 100))
+
+    def drawScreen(self):
+        self.boardDraw()
+
 
     def setField(self, column):
         try:

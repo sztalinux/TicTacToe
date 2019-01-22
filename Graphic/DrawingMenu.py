@@ -18,7 +18,7 @@ class DrawingMenu(Window):
         buttonX = 50
         buttonY = 50
         clickAction = lambda: self.startTheGame()  # lambda
-        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GREEN"], ("START", 40, textColour), clickAction)
+        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GRAY"], ("START", 40, textColour), clickAction)
 
     def createEndButton(self):
         textColour = colours["BLACK"]
@@ -27,15 +27,20 @@ class DrawingMenu(Window):
         buttonX = 300
         buttonY = 50
         clickAction = lambda: self.endTheGame()  # lambda
-        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GREEN"], ("END", 40, textColour), clickAction)
+        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GRAY"], ("END", 40, textColour), clickAction)
+
+    def drawScreen(self):
+        self._startButton.draw()
+        self._endButton.draw()
 
     def startTheGame(self):
-        self._game.startGame(Player1)
         self._ifStartClicked = True
 
     def endTheGame(self):
         self._ifEndClicked = True
 
+    def clear(self):
+        super().fillBackground()
 
 
     @property

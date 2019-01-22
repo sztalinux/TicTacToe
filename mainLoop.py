@@ -26,16 +26,20 @@ class mainLoop:
                     sys.exit(0)
 
             if not (self._menuWindow.ifStartClicked or self._menuWindow.ifEndClicked):
-                self._menuWindow.startButton.draw()
-                self._menuWindow.endButton.draw()
+                self._menuWindow.drawScreen()
                 self._signSelectionWindow.setIfMenuClicked(False)
             elif self._menuWindow.ifStartClicked:
-                self._signSelectionWindow.playButton.draw()
-                self._signSelectionWindow.menuButton.draw()
+                self._menuWindow.clear()
+                self._signSelectionWindow.drawScreen()
                 if self._signSelectionWindow.ifMenuClicked:
+                    self._menuWindow.clear()
                     self._menuWindow.setIfStartClicked(False)
                 elif self._signSelectionWindow.ifPlayClicked:
+                    self._menuWindow.clear()
+                    self._gameWindow.drawScreen()
                     self._gameControl.start()
 
+
+            # self._menuWindow.clear()
             pygame.display.flip()
 

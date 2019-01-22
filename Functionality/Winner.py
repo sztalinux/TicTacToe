@@ -2,10 +2,6 @@ from Functionality.Player import *
 from Functionality.Symbol import *
 from Functionality.Board import *
 
-
-
-
-
 class Winner:
     def __init__(self, board):
         self._board = board
