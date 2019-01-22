@@ -3,10 +3,10 @@ from Functionality.Game import *
 from Graphic.Drawing import *
 
 class DrawingSignSelection(Window):
-    def __init__(self):
+    def __init__(self, game):
         super().__init__()
         self._player = 0
-        self._game = Game()
+        self._game = game
         self._ifPlayClicked = False
         self._ifMenuClicked = False
         self._playButton = self.createPlayButton()
@@ -22,7 +22,7 @@ class DrawingSignSelection(Window):
         buttonX = 50
         buttonY = 0
         clickAction = lambda: self.setXPlayer()  # lambda
-        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GREEN"], ("X", 40, textColour), clickAction)
+        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GRAY"], colours["DARK GRAY"], ("X", 40, textColour), clickAction)
 
     def createOButton(self):
         textColour = colours["BLACK"]
@@ -31,7 +31,7 @@ class DrawingSignSelection(Window):
         buttonX = 300
         buttonY = 0
         clickAction = lambda: self.setOPlayer()  # lambda
-        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GREEN"], ("O", 40, textColour), clickAction)
+        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GRAY"], colours["DARK GRAY"], ("O", 40, textColour), clickAction)
 
     def createPlayButton(self):
         textColour = colours["BLACK"]
@@ -40,7 +40,7 @@ class DrawingSignSelection(Window):
         buttonX = 50
         buttonY = 100
         clickAction = lambda: self.startTheGame()  # lambda
-        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GREEN"], ("PLAY", 40, textColour), clickAction)
+        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GRAY"], colours["DARK GRAY"], ("PLAY", 40, textColour), clickAction)
 
     def createMenuButton(self):
         textColour = colours["BLACK"]
@@ -49,7 +49,7 @@ class DrawingSignSelection(Window):
         buttonX = 300
         buttonY = 100
         clickAction = lambda: self.backToMenu()  # lambda
-        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GREEN"], ("MENU", 40, textColour), clickAction)
+        return Button(self._window, buttonX, buttonY, buttonWidth, buttonHeight, colours["GRAY"], colours["DARK GRAY"], ("MENU", 40, textColour), clickAction)
 
     def drawScreen(self):
         self._playButton.draw()
@@ -100,5 +100,8 @@ class DrawingSignSelection(Window):
 
     def setIfMenuClicked(self, param):
         self._ifMenuClicked = param
+
+    def setIfPlayClicked(self, param):
+        self._ifPlayClicked = param
 
 

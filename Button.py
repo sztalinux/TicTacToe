@@ -1,14 +1,14 @@
 from Graphic.Window import *
 
 class Button():
-    def __init__(self, window, x, y, width, height, normalColour, text=("", 0, 0), action=None):
+    def __init__(self, window, x, y, width, height, normalColour, highlightedColour, text=("", 0, 0), action=None):
         self._window = window
         self._x = x
         self._y = y
         self._w = width
         self._h = height
         self._ic = normalColour
-        self._ac = normalColour
+        self._ac = highlightedColour
         self._action = action
         self._text, self._textSize, self._textColour = text
         self._wasClicked = False
@@ -19,6 +19,8 @@ class Button():
         return self._x + self._w > mouse[0] > self._x and self._y + self._h > mouse[1] > self._y
 
     def draw(self):
+        if not self._enabled:
+            self._ac = self._ic
         if self._enabled and self.isMouseOver():
             self.drawHighlighted()
             click = pygame.mouse.get_pressed()

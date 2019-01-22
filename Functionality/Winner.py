@@ -3,8 +3,11 @@ from Functionality.Symbol import *
 from Functionality.Board import *
 
 class Winner:
-    def __init__(self, board):
+    def __init__(self, board, rowCount, columnCount):
         self._board = board
+        self._rowCount = rowCount
+        self._columnCount = columnCount
+
 
     def getFieldState(self, row, column):
         return self._board.getField(row, column).getSymbol()
@@ -26,11 +29,11 @@ class Winner:
         return winner
 
     def isFinishedRows(self):
-        for row in range(0, RowCount - 1, 1):
+        for row in range(0, self._rowCount, 1):
             countX = 0
             countO = 0
 
-            for column in range(0, ColumnCount - 1, 1):
+            for column in range(0, self._columnCount, 1):
                 if self._board[row][column].getSymbol() == Symbol.X:
                     countX = countX + 1
                 elif self._board[row][column].getSymbol() == Symbol.O:
@@ -38,19 +41,19 @@ class Winner:
                 else:
                     continue
 
-            if countX == RowCount:
+            if countX == self._rowCount:
                 return Symbol.X
-            elif countO == ColumnCount:
-                return Symbol.Y
+            elif countO == self._columnCount:
+                return Symbol.O
 
         return Symbol.none
 
     def isFinishedColumns(self):
-        for column in range(0, ColumnCount - 1, 1):
+        for column in range(0, self._columnCount, 1):
             countX = 0
             countO = 0
 
-            for row in range(0, RowCount - 1, 1):
+            for row in range(0, self._rowCount, 1):
                 if self._board[row][column].getSymbol() == Symbol.X:
                     countX = countX + 1
                 elif self._board[row][column].getSymbol() == Symbol.O:
@@ -58,9 +61,9 @@ class Winner:
                 else:
                     continue
 
-            if countX == RowCount:
+            if countX == self._rowCount:
                 return Symbol.X
-            elif countO == ColumnCount:
+            elif countO == self._columnCount:
                 return Symbol.Y
 
         return Symbol.none
@@ -68,7 +71,7 @@ class Winner:
     def isFinishedAxis1(self):
         countX = 0
         countO = 0
-        for row in range(0, RowCount - 1, 1):
+        for row in range(0, self._rowCount, 1):
             column = row
             if self._board[row][column].getSymbol() == Symbol.X:
                 countX = countX + 1
@@ -77,9 +80,9 @@ class Winner:
             else:
                 continue
 
-            if countX == RowCount:
+            if countX == self._rowCount:
                 return Symbol.X
-            elif countO == ColumnCount:
+            elif countO == self._columnCount:
                 return Symbol.Y
 
         return Symbol.none
@@ -88,8 +91,8 @@ class Winner:
     def isFinishedAxis2(self):
         countX = 0
         countO = 0
-        for row in range(0, RowCount - 1, 1):
-            column = RowCount - 1 - row
+        for row in range(0, self._rowCount, 1):
+            column = self._rowCount - 1 - row
             if self._board[row][column].getSymbol() == Symbol.X:
                 countX = countX + 1
             elif self._board[row][column].getSymbol() == Symbol.O:
@@ -97,9 +100,9 @@ class Winner:
             else:
                 continue
 
-            if countX == RowCount:
+            if countX == self._rowCount:
                 return Symbol.X
-            elif countO == ColumnCount:
+            elif countO == self._columnCount:
                 return Symbol.Y
 
         return Symbol.none

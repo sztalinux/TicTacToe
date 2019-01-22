@@ -7,15 +7,16 @@ from Graphic.DrawingMenu import *
 from Graphic.DrawingGame import *
 from Graphic.DrawingSignSelection import *
 from Graphic.Window import *
-from Functionality.GameControl import *
 
 
 class mainLoop:
     def __init__(self):
-        self._menuWindow = DrawingMenu()
-        self._gameWindow = DrawingGame()
-        self._signSelectionWindow = DrawingSignSelection()
-        self._gameControl = GameControl(self._signSelectionWindow, self._gameWindow)
+        self._game = Game()
+        self._menuWindow = DrawingMenu(self._game)
+        self._gameWindow = DrawingGame(self._game)
+        self._signSelectionWindow = DrawingSignSelection(self._game)
+        self._started = True
+
 
     def loop(self):
 
@@ -25,7 +26,7 @@ class mainLoop:
                 if event.type == pygame.QUIT:
                     sys.exit(0)
 
-            if not (self._menuWindow.ifStartClicked or self._menuWindow.ifEndClicked):
+            if not self._menuWindow.ifStartClicked:
                 self._menuWindow.drawScreen()
                 self._signSelectionWindow.setIfMenuClicked(False)
             elif self._menuWindow.ifStartClicked:
@@ -36,10 +37,39 @@ class mainLoop:
                     self._menuWindow.setIfStartClicked(False)
                 elif self._signSelectionWindow.ifPlayClicked:
                     self._menuWindow.clear()
-                    self._gameWindow.drawScreen()
-                    self._gameControl.start()
+                    if not self._started:
+                        self._signSelectionWindow.startTheGame()
+                        self._started = True
+                    self.start()
 
 
             # self._menuWindow.clear()
             pygame.display.flip()
+
+    def start(self):
+
+        self._gameWindow.drawScreen()
+        while (True):
+            self._gameWindow.drawScreen()
+            winner = self._game.whoHasWon()
+            if winner != Symbol.none or self._game.boardIsFull():
+                self._gameWindow.drawWinner(winner)
+                break
+            elif self._gameWindow.ifResetClicked:
+                break
+            elif self._gameWindow.ifMenuClicked:
+                self._started = False
+                self._menuWindow.clear()
+                self._menuWindow.setIfStartClicked(False)
+                self._signSelectionWindow.setIfPlayClicked(False)
+                self._signSelectionWindow.setIfMenuClicked(False)
+                break
+            else:
+                self._gameWindow.wasMoved()
+                break
+
+
+
+
+
 
